@@ -114,3 +114,40 @@ group by  Year(sale_date),month(sale_date)
 ) as a where dn_rnk=1;
 ```
 
+### 8.Write a query to find the top 5 customers based on the highest total sales
+```sql
+Select * from (
+Select customer_id,
+dense_rank() over (order by sum(total_sale) desc) as dn_rnk
+from Retail_Sales
+group by customer_id) as a where dn_rnk <=5;
+```
+
+### 9.Write a query to find the number of unique customers  from each category
+```sql
+select category, count(distinct customer_id) as  n_of_unq_cust
+from Retail_Sales
+group by category;
+```
+
+### 10.Write a query to create each shift and number of orders( example morning<=12 afternoon between 12 and 17 and evening >17)
+```sql
+Select Shifts, count(*) as No_of_orders from 
+(Select case when sale_time <='11:59:00' then 'Morning' 
+when sale_time Between '12:00:00' and '17:00:00' then 'Afternoon'
+else 'Evening' end as Shifts
+from Retail_Sales) 
+as a group by Shifts;			
+```
+#### OR
+```sql
+With Cte_Shifts_details as(
+Select *,case when sale_time <='11:59:00' then 'Morning' 
+when sale_time Between '12:00:00' and '17:00:00' then 'Afternoon'
+else 'Evening' end as Shifts
+from Retail_Sales)
+
+Select Shifts, Count(*) as no_of_orders
+From Cte_Shifts_details
+group by Shifts;
+```
