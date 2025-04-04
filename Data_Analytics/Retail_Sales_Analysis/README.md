@@ -1,9 +1,9 @@
 # Retail Sales Analysis SQL Project
 ## Project Overview
 
-**Project Title**: Retail Sales Analysis  
+**Project Title**: `Retail Sales Analysis`  
 **Level**: Beginner  
-**Database**:portfolio_project
+**Database**:`portfolio_project`
 
 
 
@@ -13,4 +13,4 @@ This project is designed to demonstrate SQL skills and techniques typically used
 ##**Project Structure:**  
 ##1. Database Setup
 **-Database Creation:** Creating a database named `portfolio_project`
-**-Table Creation:** Creating a table named '''Retail_Sales'''
+**-Table Creation:** Creating a table named `Retail_Sales`
