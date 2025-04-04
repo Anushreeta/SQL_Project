@@ -57,8 +57,60 @@ Below SQL queries were developed to answer specific business questions.
 
 ### 1. Write a query to retrieve all columns for sales made on '2022-11-05'
 ```sql
-		Select * 
-		from Retail_Sales 
-		where sale_date='2022-11-05';
+Select * 
+from Retail_Sales 
+where sale_date='2022-11-05';
+```
+
+### 2.Write a query to retrieve all transactions where category is 'clothing' and the quantity sold is more than 3 in the month of Nov 2022
+```sql
+Select *
+From Retail_Sales 
+where (month(sale_date)='11' and
+year(sale_date)='2022') and
+(lower(category)='clothing' and quantiy>3);
+```
+
+### 3.Write a query to calculate total sales and total_orders for each category
+```sql
+Select category, sum(total_sale) as total_sales,
+count(*) as total_orders
+From Retail_Sales 
+group by category;
+```
+
+### 4.Write a query to find the avg age of customers who purchased items from the beauty category
+```sql
+Select avg(age)  as average_age
+from Retail_Sales
+where lower(category)='beauty';
+```
+```sql
+
+```
+
+### 5.Write a query to find all  transactions where the total sales is greater than 1000
+```sql
+Select *
+from Retail_Sales where total_sale>1000;
+```
+
+### 6.Write a query to find the total number of transactions(transaction_id) made by each gender in each category
+```sql
+Select category,gender ,count(transactions_id) as no_of_transactions
+from Retail_Sales
+group by category,gender
+order by category;
+```
+
+#### 7.Write a query to calculate the avg sale for each month. Find out best selling month in each year
+```sql
+Select sale_year,sale_month, avg_sales from
+(Select Year(sale_date) as sale_year, month(sale_date) as sale_month,
+avg(total_sale) as avg_sales,
+DENSE_RANK() over (partition by Year(sale_date) order by avg(total_sale) desc) as dn_rnk
+from Retail_Sales
+group by  Year(sale_date),month(sale_date)
+) as a where dn_rnk=1;
 ```
 
