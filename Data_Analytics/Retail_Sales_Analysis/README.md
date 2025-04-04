@@ -15,7 +15,7 @@ This project is designed to demonstrate SQL skills and techniques typically used
 **-Database Creation:** Creating a database named `portfolio_project`  
 **-Table Creation:** Creating a table named `Retail_Sales` which will store sales data. Table structure include transaction ID, sale date, sale time, customer ID, gender, age, product category, quantity sold, price per unit, cost of goods sold (COGS), and total sale amount.
 
-```
+```sql
 Create database portfolio_project;
 
 Drop table if exists Retail_Sales;
