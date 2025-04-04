@@ -3,7 +3,7 @@ Create database portfolio_project;
 
 
 --Create a Table Retail Sales Analysis
-'''SQL
+
 Drop table if exists Retail_Sales;
 Create table Retail_Sales(
 
@@ -19,7 +19,7 @@ Create table Retail_Sales(
 	cogs float,
 	total_sale float
 );
-'''
+
 --Imported data from a csv file
 
 ALTER TABLE Retail_Sales
