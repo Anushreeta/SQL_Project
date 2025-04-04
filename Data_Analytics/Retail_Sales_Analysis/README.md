@@ -39,7 +39,7 @@ Create table Retail_Sales(
 - **Category Count**: Identify all unique category present in the dataset.  
 - **Null value check**: Check for any null values in the dataset and replace them with 'Not Available'
 
-  ```sql
+```sql
 Select count(*) from Retail_Sale;  
 
 Select count(distinct customer_id) as no_of_customers
@@ -50,6 +50,5 @@ From Retail_Sales;
 
 Select coalesce(cogs,'Not Available') as cogs
 From Retail_Sales;
-
 ```
 
