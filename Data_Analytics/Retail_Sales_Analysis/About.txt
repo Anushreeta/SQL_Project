@@ -1,0 +1,1 @@
+This project is about retail sales anlaysis. Here we will import the data from a CSV file to Sql Server Management Studio and perform various analysis on the top of the data
