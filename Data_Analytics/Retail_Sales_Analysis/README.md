@@ -52,3 +52,13 @@ Select coalesce(cogs,'Not Available') as cogs
 From Retail_Sales;
 ```
 
+## 3. Data Analysis  
+Below SQL queries were developed to answer specific business questions.  
+
+### 1. Write a query to retrieve all columns for sales made on '2022-11-05'
+```sql
+		Select * 
+		from Retail_Sales 
+		where sale_date='2022-11-05';
+```
+
