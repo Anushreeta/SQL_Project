@@ -34,4 +34,8 @@ Create table Retail_Sales(
 ```
 
 ## 2.Data Exploration and Cleaning  
-**- Record Count**: 
+**- Record Count**: Find the total number of records in the dataset.  
+**- Unique Customer Count**: Find number of unique customer present in the dataset.  
+**- Category Count**: Identify all unique category present in the dataset.  
+**- Null value check**: Check for any null values in the dataset and replace them with 'Not Available'  
+
