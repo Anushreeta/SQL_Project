@@ -85,9 +85,6 @@ Select avg(age)  as average_age
 from Retail_Sales
 where lower(category)='beauty';
 ```
-```sql
-
-```
 
 ### 5.Write a query to find all  transactions where the total sales is greater than 1000
 ```sql
@@ -150,4 +147,80 @@ from Retail_Sales)
 Select Shifts, Count(*) as no_of_orders
 From Cte_Shifts_details
 group by Shifts;
+```
+
+### 11.Write a query to find Customer who purchased all 3 caategory
+```sql
+select customer_id, count(distinct category) as n_of_unq_cat
+from Retail_Sales
+group by customer_id
+having count(distinct category)= (Select count(distinct category) from Retail_Sales);
+```
+
+### 12.Sales team wants to know if male or female who are purchasing more beauty products
+```sql
+Select top 1 gender,count(*) as total_purchase
+from Retail_Sales
+where category='beauty'
+group by gender 
+order by total_purchase desc;
+```
+
+### 13.Sales team wants to know category wise total sales with ranking them with highest sales on top
+```sql
+Select * from(Select
+category, sum(total_sale) as total_sales,
+dense_rank() over (order by sum(total_sale) desc ) rank_sales
+From Retail_Sales
+group by category) as a
+order by rank_sales asc;
+```
+
+### 14.Sales team wants to know the customer who has purchased more(if tie exist list all)
+```sql
+Select customer_id, total_sales from
+(Select Customer_id, sum(total_sales) as total_sales,
+Dense_rank() over (order by sum(total_sales) desc) as dn_rnk
+from Retail_Sales
+group by customer_id) 
+as cust_details where dn_rnk=1;
+```
+### 15. Sales team wants to know the customer who is inactive(if sale_date is greater than 30 days from current_date).
+<!--Since we have less data considering 5 days window with past current data -->
+```sql	
+Select customer_id,last_purchase_date, datediff(Day,last_purchase_date,'2024-01-2') as inactive_since_as_days 
+from
+(Select customer_id, max(sale_date) as last_purchase_date
+From Retail_Sales
+Group by customer_id
+) as a 
+where datediff(Day,last_purchase_date,'2024-01-2')>30;
+```
+### 16. Sales team wants to know the male and female customer present in dataset(unique)
+```sql	
+Select gender, count(distinct customer_id) as no_of_customer
+from Retail_Sales
+group by gender;
+```
+### 17.Sales team ran a sell for Aug 2022, and wants to know total sale for that period. 
+```sql
+SELECT  
+CONCAT(MONTH(sale_date), '-', YEAR(sale_date)) AS sale_month_yr,
+SUM(total_sale) AS sale_amt_in_sales
+FROM Retail_Sales
+WHERE YEAR(sale_date) = 2022 AND MONTH(sale_date) = 10
+GROUP BY CONCAT(MONTH(sale_date), '-', YEAR(sale_date));
+```   
+	
+### 18. sales teams wants to know profit/loss happens for each category and every month each year
+<!-- total_sales-cogs if - then loss /if not - then profit -->
+  ```sql  
+Select Category,mth_yr, sum(profit_loss_amt) as total_loss_profit
+from
+(Select category,total_sale,cogs, CONCAT(MONTH(sale_date), '-', YEAR(sale_date)) as mth_yr ,
+(total_sale-cogs) as 'profit_loss_amt' 
+from Retail_Sales 
+) as a
+group by Category,mth_yr
+order by mth_yr asc;
 ```
