@@ -10,7 +10,7 @@
 
 This project is designed to demonstrate SQL skills and techniques typically used by data analysts to explore, clean, and analyze retail sales data. The project involves setting up a portfolio_project database, creating table and importing data from the CSV file, performing  data analysis, and answering specific business questions through SQL queries.
 
-##**Project Structure:**  
-#1. Database Setup  
+## **Project Structure:**  
+# 1. Database Setup  
 **-Database Creation:** Creating a database named `portfolio_project`  
 **-Table Creation:** Creating a table named `Retail_Sales`
